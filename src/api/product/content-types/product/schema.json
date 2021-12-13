@@ -46,11 +46,16 @@
       "type": "integer",
       "default": 0
     },
-    "options": {
-      "type": "json"
+    "collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection.collection",
+      "mappedBy": "product"
     },
-    "variants": {
-      "type": "json"
+    "options": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.variants"
     }
   }
 }

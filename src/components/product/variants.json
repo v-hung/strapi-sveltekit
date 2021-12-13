@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_options_variants",
+  "info": {
+    "displayName": "options",
+    "icon": "project-diagram",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "color": {
+      "type": "component",
+      "repeatable": false,
+      "component": "variants.color"
+    },
+    "size": {
+      "type": "component",
+      "repeatable": false,
+      "component": "variants.size"
+    },
+    "pirce": {
+      "type": "decimal"
+    }
+  }
+}

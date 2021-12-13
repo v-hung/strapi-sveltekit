@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_variants_colors",
+  "info": {
+    "displayName": "color",
+    "icon": "paint-brush",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "default": "#444"
+    }
+  }
+}

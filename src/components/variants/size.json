@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_variants_sizes",
+  "info": {
+    "displayName": "size",
+    "icon": "blender",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "size": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
