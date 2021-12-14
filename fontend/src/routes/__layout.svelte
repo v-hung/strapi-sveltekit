@@ -3,44 +3,21 @@
 	import '../app.css';
 </script>
 
-<Header>
-	<main>
-		<slot />
-	</main>
+<Header />
+<main class="flex-grow">
+  <slot />
+</main>
 
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
+<footer class="flex-none bg-blue-500 text-white text-center">
+  <p class="px-4 py-2">Việt Hùng Developer</p>
+</footer>
 
-	<style>
-		main {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-			padding: 1rem;
-			width: 100%;
-			max-width: 1024px;
-			margin: 0 auto;
-			box-sizing: border-box;
-		}
+<style lang="postcss">
+  :global(body) {
+    @apply h-screen;
+  }
 
-		footer {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			padding: 40px;
-		}
-
-		footer a {
-			font-weight: bold;
-		}
-
-		@media (min-width: 480px) {
-			footer {
-				padding: 40px 0;
-			}
-		}
-	</style>
-</Header>
-<slot />
+  :global(#svelte) {
+    @apply flex flex-col min-h-full;
+  }
+</style>

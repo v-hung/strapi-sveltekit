@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * customer service.
+ * menu service.
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::customer.customer');
+module.exports = createCoreService('api::menu.menu');

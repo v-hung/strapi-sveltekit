@@ -12,16 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "customer": {
+    "user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::customer.customer"
-    },
-    "CartItems": {
-      "type": "component",
-      "repeatable": true,
-      "component": "cart.cart-items",
-      "required": true
+      "target": "plugin::users-permissions.user"
     }
   }
 }
