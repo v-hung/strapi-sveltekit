@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "galleries",
+  "info": {
+    "singularName": "gallery",
+    "pluralName": "galleries",
+    "displayName": "gallery"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "photos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::photo.photo",
+      "mappedBy": "gallery"
+    }
+  }
+}
