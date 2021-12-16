@@ -4,6 +4,7 @@ module.exports = ({ env }) => ({
   },
   watchIgnoreFiles: [
     './fontend', // Folder
-    'C:/Users/Memo/Downloads/home/home/nodejs/strapi-sveltekit/fontend'
+    'C:/Users/Memo/Downloads/home/home/nodejs/strapi-sveltekit/fontend',
+    '/home/viethung/Desktop/Memo/home/nodejs/strapi-sveltekit/fontend'
   ],
 });

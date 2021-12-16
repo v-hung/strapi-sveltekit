@@ -1,20 +1,17 @@
-import { env } from "../config";
-const HOST_API = env.VITE_HOST_API || ''
+import { HOST_API } from "../config";
 
-export const getWithAtt = async ({email,password,username}) => {
+export const getPhotoWithGallery = async ({slug, limit = 25}) => {
   try {
-    const response = await fetch(HOST_API + '/api/auth/local/register', {
-      method: 'POST',
+    const response = await fetch(HOST_API + `/api/photos?filters[gallery][slug][$eq]=${slug}&populate=image&pagination[limit]=${limit}`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
         // 'Content-Type': 'application/x-www-form-urlencoded',
-        // 'Authorization': 'Bearer ' + jwt,
       },
-      body: JSON.stringify({
-        email,
-        password,
-        username
-      })
+      // body: JSON.stringify({
+      //   identifier: email,
+      //   password
+      // })
     })
 
     const data = await response.json()

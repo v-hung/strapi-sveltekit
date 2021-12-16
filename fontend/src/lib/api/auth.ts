@@ -1,5 +1,4 @@
-import { env } from "../config";
-const HOST_API = env.VITE_HOST_API || ''
+import { HOST_API } from "../config";
 
 export const registerAPI = async ({email,password,username}) => {
   try {

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "photo",
     "pluralName": "photos",
-    "displayName": "photo"
+    "displayName": "photo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,17 +19,18 @@
       "type": "string",
       "unique": false
     },
-    "discription": {
+    "description": {
       "type": "text"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "gallery": {
       "type": "relation",
