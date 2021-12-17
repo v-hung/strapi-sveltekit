@@ -2,6 +2,10 @@
 	import { page } from '$app/stores';
 	import { user, model } from '../../store';
 	import { clickOutside } from '$lib/clickOutside';
+	import { getMenuWithSlug } from '$lib/api/menu';
+	import { onMount } from 'svelte';
+  import { HOST_API } from "$lib/config";
+  import { getPhotoByGallery } from "$lib/api/photo";
 
 	function handelClickOutside() {
 		for (var key in $model) {
@@ -13,10 +17,47 @@
 		handelClickOutside();
 		$model[key] = true;
 	}
+
+	let menu = [];
+
+	const getHeaderMenu = async () => {
+		try {
+			let result = await getMenuWithSlug({ slug: 'header' });
+			menu = result.data[0]?.attributes?.items || [];
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	let breadcrumbImage = null;
+
+	const getBreadcrumb = async () => {
+		try {
+			let result = await getPhotoByGallery({ slug: 'breadcrumb', limit: 1 });
+
+			breadcrumbImage = (await result.data[0]) || null;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	onMount(async () => {
+		await getHeaderMenu();
+
+		if ($page.path != '/') {
+			await getBreadcrumb();
+		}
+	});
 </script>
 
 <header class="flex-none z-50">
-	<div class="absolute w-full top-0 left-0 text-white">
+	<div
+		class="{$page.path == '/'
+			? 'absolute'
+			: `bg-no-repeat bg-cover`}
+      w-full top-0 left-0 text-white"
+    style="background: url({HOST_API}{breadcrumbImage?.attributes?.image?.data?.attributes?.url || ''});"
+	>
 		<div class="w-full max-w-7xl mx-auto px-4">
 			<div class="w-full flex items-center justify-between py-6 border-b border-white">
 				<div class="flex-1 flex items-center space-x-4">
@@ -75,16 +116,13 @@
 								<div class="flex flex-col">
 									<span class="cursor-pointer px-6 py-1 hover:text-primary-500">My account</span>
 									<span class="cursor-pointer px-6 py-1 hover:text-primary-500">My wishlist</span>
-                  <span class="cursor-pointer px-6 py-1 hover:text-primary-500">Logout</span>
+									<span class="cursor-pointer px-6 py-1 hover:text-primary-500">Logout</span>
 								</div>
 							</div>
 						{/if}
 					</div>
 
-          <div
-						use:clickOutside={() => handelClickOutside()}
-						class="relative inline-flex py-1.5"
-					>
+					<div use:clickOutside={() => handelClickOutside()} class="relative inline-flex py-1.5">
 						<div
 							on:click|stopPropagation={() => clickInside('search')}
 							class="inline-flex text-2xl hover:text-primary-500 hover:cursor-pointer"
@@ -93,22 +131,27 @@
 						</div>
 						{#if $model['search']}
 							<div
-                on:click|stopPropagation|preventDefault={() => {}}
-                class="fixed w-full h-full top-0 left-0 bg-black/90 text-white z-10"
-              >
+								on:click|stopPropagation|preventDefault={() => {}}
+								class="fixed w-full h-full top-0 left-0 bg-black/90 text-white z-10"
+							>
 								<div class="flex w-full h-full justify-center items-center relative">
-                  <div class="relative w-full max-w-5xl border-b border-white">
-                    <input type="text" class="pl-4 py-3 pr-10 bg-transparent w-full focus:outline-none text-lg">
-                    <button class="absolute right-0 text-2xl p-2 hover:text-primary-500"><i class="bx bx-search-alt"></i></button>
-                  </div>
+									<div class="relative w-full max-w-5xl border-b border-white">
+										<input
+											type="text"
+											class="pl-4 py-3 pr-10 bg-transparent w-full focus:outline-none text-lg"
+										/>
+										<button class="absolute right-0 text-2xl p-2 hover:text-primary-500"
+											><i class="bx bx-search-alt" /></button
+										>
+									</div>
 
-                  <button
-                    on:click|preventDefault|stopPropagation={() => $model['search'] = false}
-                    class="absolute right-4 top-4 hover:text-primary-500 flex items-center font-semibold uppercase text-sm"
-                  >
-                    <span class="inline-flex">Close</span>
-                    <span class="inline-flex text-2xl"><i class='bx bx-x' ></i></span>
-                  </button>
+									<button
+										on:click|preventDefault|stopPropagation={() => ($model['search'] = false)}
+										class="absolute right-4 top-4 hover:text-primary-500 flex items-center font-semibold uppercase text-sm"
+									>
+										<span class="inline-flex">Close</span>
+										<span class="inline-flex text-2xl"><i class="bx bx-x" /></span>
+									</button>
 								</div>
 							</div>
 						{/if}
@@ -142,60 +185,22 @@
 			</div>
 
 			<div class="w-full flex items-center justify-center border-b">
-				<a
-					href="/"
-					sveltekit:prefetch
-					class="px-4 py-5 font-semibold uppercase font-mono hover:text-primary-400 {$page.path ==
-					'/'
-						? 'text-primary-400'
-						: ''}">Home</a
-				>
-				<a
-					href="/collection"
-					sveltekit:prefetch
-					class="px-4 py-5 font-semibold uppercase font-mono hover:text-primary-400 {$page.path ==
-					'/collection'
-						? 'text-primary-400'
-						: ''}">Collection</a
-				>
-				<a
-					href="/product"
-					sveltekit:prefetch
-					class="px-4 py-5 font-semibold uppercase font-mono hover:text-primary-400 {$page.path ==
-					'/product'
-						? 'text-primary-400'
-						: ''}">Product</a
-				>
-				<a
-					href="/contact"
-					sveltekit:prefetch
-					class="px-4 py-5 font-semibold uppercase font-mono hover:text-primary-400 {$page.path ==
-					'/contact'
-						? 'text-primary-400'
-						: ''}">Contact</a
-				>
-				<a
-					href="/blog"
-					sveltekit:prefetch
-					class="px-4 py-5 font-semibold uppercase font-mono hover:text-primary-400 {$page.path ==
-					'/blog'
-						? 'text-primary-400'
-						: ''}">BLog</a
-				>
+				{#each menu as item (item.id)}
+					<a
+						href={item.url}
+						sveltekit:prefetch
+						class="px-4 py-5 font-semibold uppercase font-mono hover:text-primary-400 {$page.path ==
+						item.url
+							? 'text-primary-400'
+							: ''}">{item.title}</a
+					>
+				{/each}
 			</div>
+
+			<!-- breadcrumb -->
+      {#if $page.path != '/'}
+			  <div class="w-full py-16 text-center">fdsf</div>
+      {/if}
 		</div>
 	</div>
-
-	<!-- <nav class="flex space-x-4 justify-center shadow-md">
-    <a href="/" sveltekit:prefetch class="px-2 py-3 border-b-[3px] { ($page.path == '/') ? 'border-blue-500' : 'border-transparent' } hover:border-blue-500">Home</a>
-    <a href="/about" sveltekit:prefetch class="px-2 py-3 border-b-[3px] { ($page.path == '/about') ? 'border-blue-500' : 'border-transparent' } border-transparent hover:border-blue-500">About</a>
-
-    {#if $user}
-      <a href="/profile" sveltekit:prefetch class="px-2 py-3 border-b-[3px] { ($page.path == '/profile') ? 'border-blue-500' : 'border-transparent' } border-transparent hover:border-blue-500">{$user.username}</a>
-    {:else}
-      <a href="/auth/login" sveltekit:prefetch class="px-2 py-3 border-b-[3px] { ($page.path == '/auth/login') ? 'border-blue-500' : 'border-transparent' } border-transparent hover:border-blue-500">Login</a>
-      <a href="/auth/register" sveltekit:prefetch class="px-2 py-3 border-b-[3px] { ($page.path == '/auth/register') ? 'border-blue-500' : 'border-transparent' } border-transparent hover:border-blue-500">Register</a>
-    {/if}
-
-  </nav> -->
 </header>

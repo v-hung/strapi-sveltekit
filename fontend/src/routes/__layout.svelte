@@ -12,7 +12,7 @@
 </script>
 
 <Header />
-<main class="flex-grow">
+<main class="flex-grow flex flex-col">
   <slot />
 </main>
 

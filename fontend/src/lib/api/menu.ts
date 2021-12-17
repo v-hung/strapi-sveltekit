@@ -1,8 +1,8 @@
 import { HOST_API } from "../config";
 
-export const getProductByCollection = async ({slug}) => {
+export const getMenuWithSlug = async ({slug}) => {
   try {
-    const response = await fetch(HOST_API + `/api/products?filters[collection][slug][$eq]=${slug}&populate=image`, {
+    const response = await fetch(HOST_API + `/api/menus?filters[slug][$eq]=${slug}&populate[items][populate]=childrens.childrens`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

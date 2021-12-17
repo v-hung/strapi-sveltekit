@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-  import { getPhotoWithGallery } from "$lib/api/photo";
+  import { getPhotoByGallery } from "$lib/api/photo";
   import { onMount } from "svelte";
   import { HOST_API } from "$lib/config";
   import Swiper, { Navigation, Autoplay } from 'swiper';
@@ -15,7 +15,7 @@
 
   const getBannerHome = async () => {
     try {
-      let result = await getPhotoWithGallery({slug:'home-page', limit: 4})
+      let result = await getPhotoByGallery({slug:'home-page', limit: 4})
 
       bannerHome = await result.data
 

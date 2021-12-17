@@ -2,7 +2,6 @@
   import { getCollectionWithType } from "$lib/api/collection";
   import { onMount } from "svelte";
   import { HOST_API } from "$lib/config";
-import { set_attributes } from "svelte/internal";
 
   let collections = []
 
@@ -19,7 +18,6 @@ import { set_attributes } from "svelte/internal";
 
   onMount(async() => {
     await getCollection()
-    console.log(collections);
 
   })
 </script>

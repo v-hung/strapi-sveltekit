@@ -15,7 +15,7 @@
       "type": "string",
       "required": false
     },
-    "children": {
+    "childrens": {
       "type": "component",
       "repeatable": true,
       "component": "menu.dropdown"

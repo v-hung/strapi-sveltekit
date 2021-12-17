@@ -1,6 +1,6 @@
 import { HOST_API } from "../config";
 
-export const getPhotoWithGallery = async ({slug, limit = 25}) => {
+export const getPhotoByGallery = async ({slug, limit = 25}) => {
   try {
     const response = await fetch(HOST_API + `/api/photos?filters[gallery][slug][$eq]=${slug}&populate=image&pagination[limit]=${limit}`, {
       method: 'GET',

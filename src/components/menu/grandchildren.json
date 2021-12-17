@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_menu_grandchildren_s",
+  "info": {
+    "displayName": "grandchildren ",
+    "icon": "people-carry"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

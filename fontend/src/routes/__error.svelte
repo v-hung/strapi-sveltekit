@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
 	export function load({ error, status }) {
 		return {
 			props: {
@@ -6,20 +6,27 @@
 			}
 		};
 	}
-</script>
+</script> -->
 
 <script lang="ts">
-	export let title;
+	import Breadcrumb from "$lib/components/Breadcrumb.svelte";
+
+  let breadcrumb = {
+    title: 'Whoops, our bad...',
+    description: `<p class="">
+        The page you requested does not exist.
+        <a href="/" class="font-semibold hover:text-primary-500">Click here</a> to continue shopping.
+      </p>`,
+    data: []
+  }
 </script>
 
-<section class="error h-full">
-  <div class="w-full h-full max-w-7xl mx-auto px-4 flex items-center text-center">
-    <h1>{title}</h1>
+<!-- <Breadcrumb data={breadcrumb}/> -->
+
+<section class="error ">
+  <div class="w-full max-w-7xl mx-auto px-4 text-center py-8">
+    <!-- <h1 class="text-7xl font-semibold">404 Page Not Found</h1>
+    <p class="">The page you requested does not exist. Click here to continue shopping.</p> -->
+
   </div>
 </section>
-
-<style lang="postcss">
-  :global(main) {
-    @apply bg-gradient-to-tr from-gray-700 to-gray-200;
-  }
-</style>
