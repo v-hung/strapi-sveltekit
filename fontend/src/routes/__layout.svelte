@@ -7,19 +7,6 @@
   import { browser } from '$app/env';
 
   if (browser) {
-    // (async() => {
-    //   try {
-    //     let jwt = cookies.get('jwt')
-    //     if (!jwt) throw new Error('User Not logger')
-
-    //     let result = await loggerAPI({jwt})
-
-    //     $user = await result
-    //   }
-    //   catch (error) {
-    //     $user = null
-    //   }
-    // })()
   }
 
 </script>

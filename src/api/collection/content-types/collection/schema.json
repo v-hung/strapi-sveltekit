@@ -22,7 +22,7 @@
       "required": true,
       "unique": true
     },
-    "discription": {
+    "description": {
       "type": "text"
     },
     "image": {
@@ -43,6 +43,10 @@
       "relation": "manyToOne",
       "target": "api::product.product",
       "inversedBy": "collections"
+    },
+    "type": {
+      "type": "string",
+      "required": false
     }
   }
 }

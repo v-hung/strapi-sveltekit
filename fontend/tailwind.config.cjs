@@ -77,7 +77,7 @@ const config = {
       //   '800' : 'var(--color-primary-800)',
       //   '900' : 'var(--color-primary-900)',
       // },
-      primary: colors.blue
+      primary: colors.amber
 		},
     border: {
       // primary: {
@@ -92,7 +92,7 @@ const config = {
       //   '800' : 'var(--color-primary-800)',
       //   '900' : 'var(--color-primary-900)',
       // },
-      primary: colors.blue
+      primary: colors.amber
     },
     background: {
       // primary: {
@@ -107,7 +107,7 @@ const config = {
       //   '800' : 'var(--color-primary-800)',
       //   '900' : 'var(--color-primary-900)',
       // },
-      primary: colors.blue
+      primary: colors.amber
     }
 	},
 

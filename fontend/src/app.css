@@ -13,3 +13,9 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@layer utilities {
+  .transition-all-0\.3 {
+    transition: all .3s ease-in-out;
+  }
+}

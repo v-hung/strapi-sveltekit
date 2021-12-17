@@ -22,7 +22,7 @@
       "required": true,
       "unique": true
     },
-    "discription": {
+    "description": {
       "type": "text"
     },
     "content": {
