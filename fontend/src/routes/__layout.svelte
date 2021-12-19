@@ -21,8 +21,8 @@
 </footer>
 
 <style lang="postcss">
-  :global(boody) {
-    color: #444;
+  :global(body) {
+    @apply text-stone-800;
   }
 
   :global(#svelte) {

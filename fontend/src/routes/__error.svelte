@@ -9,7 +9,7 @@
 </script> -->
 
 <script lang="ts">
-	import Breadcrumb from "$lib/components/Breadcrumb.svelte";
+	// import Breadcrumb from "$lib/components/Breadcrumb.svelte";
 
   let breadcrumb = {
     title: 'Whoops, our bad...',
