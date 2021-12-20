@@ -9,9 +9,10 @@
 </script> -->
 
 <script lang="ts">
-	import Breadcrumb from "$lib/components/Breadcrumb.svelte";
+  import { onDestroy } from "svelte";
+  import { breadcrumb } from "../store";
 
-  let breadcrumb = {
+  $breadcrumb = {
     title: 'Whoops, our bad...',
     description: `<p class="">
         The page you requested does not exist.
@@ -19,6 +20,14 @@
       </p>`,
     data: []
   }
+
+  onDestroy(() => {
+    return $breadcrumb = {
+      title: '',
+      description: ``,
+      data: []
+    }
+  })
 </script>
 
 <!-- <Breadcrumb data={breadcrumb}/> -->

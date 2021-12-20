@@ -11,3 +11,9 @@ export const model = writable({
 })
 
 export const error404 = writable(false);
+
+export const breadcrumb = writable({
+  title: ``,
+  description: ``,
+  data: []
+})

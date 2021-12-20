@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte';
   import { HOST_API } from "$lib/config";
   import { getPhotoByGallery } from "$lib/api/photo";
+  import { breadcrumb } from "../../store";
 
 	function handelClickOutside() {
 		for (var key in $model) {
@@ -41,22 +42,33 @@
 		}
 	};
 
-	onMount(async () => {
-		await getHeaderMenu();
+  $: if (breadcrumbImage && $page.path != '/' ) {
+      if (headerBanner)
+        headerBanner.style.backgroundImage = `url(${HOST_API}${breadcrumbImage?.attributes?.image?.data?.attributes?.url || ''})`
+  } else {
+    if (headerBanner)
+      headerBanner.style.backgroundImage = 'none'
+  }
 
-		if ($page.path != '/') {
-			await getBreadcrumb();
-		}
+  let headerBanner = null
+
+	onMount(async () => {
+    await Promise.all([
+      await getHeaderMenu(),
+      await getBreadcrumb()
+    ])
+
 	});
+
 </script>
 
 <header class="flex-none z-50">
 	<div
+    bind:this="{headerBanner}"
 		class="{$page.path == '/'
 			? 'absolute'
 			: `bg-no-repeat bg-cover`}
       w-full top-0 left-0 text-white"
-    style="background: url({HOST_API}{breadcrumbImage?.attributes?.image?.data?.attributes?.url || ''});"
 	>
 		<div class="w-full max-w-7xl mx-auto px-4">
 			<div class="w-full flex items-center justify-between py-6 border-b border-white">
@@ -199,7 +211,23 @@
 
 			<!-- breadcrumb -->
       {#if $page.path != '/'}
-			  <div class="w-full py-16 text-center">fdsf</div>
+			  <div class="w-full py-14 text-center">
+          <h2 class="text-5xl font-semibold capitalize">{$breadcrumb.title}</h2>
+          <h3 class="text-xl py-4">{@html $breadcrumb.description}</h3>
+          <div class="flex items-center justify-center space-x-2">
+            {#each $breadcrumb.data as item, i}
+              {#if i > 0}
+                <span class="inline-flex">
+                  <i class='bx bx-chevron-right'></i>
+                </span>
+              {/if}
+              <a
+                href="{item?.url || ''}"
+                class="capitalize hover:text-primary-500 {($breadcrumb.data.length - 1 == i) ? 'text-primary-500' : ''}"
+              >{item?.title || '' }</a>
+            {/each}
+          </div>
+        </div>
       {/if}
 		</div>
 	</div>

@@ -4,6 +4,7 @@ export const getMenuWithSlug = async ({slug}) => {
   try {
     const response = await fetch(HOST_API + `/api/menus?filters[slug][$eq]=${slug}&populate[items][populate]=childrens.childrens`, {
       method: 'GET',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
         // 'Content-Type': 'application/x-www-form-urlencoded',

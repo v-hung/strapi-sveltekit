@@ -2,8 +2,9 @@ import { HOST_API } from "../config";
 
 export const getProductByCollection = async ({slug}) => {
   try {
-    const response = await fetch(HOST_API + `/api/products?filters[collection][slug][$eq]=${slug}&populate=image`, {
+    const response = await fetch(HOST_API + `/api/products?filters[collections][slug][$eq]=${slug}&populate=images`, {
       method: 'GET',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
         // 'Content-Type': 'application/x-www-form-urlencoded',

@@ -59,3 +59,33 @@ export const getCollectionWithSlug = async ({slug}) => {
     throw err
   }
 }
+
+export const getCollectionInPage = async ({page = '1', pageSize = '10'}) => {
+  try {
+    const response = await fetch(HOST_API + `/api/collections?populate=image&pagination[page]=${page}&pagination[pageSize]=${pageSize}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      // body: JSON.stringify({
+      //   identifier: email,
+      //   password
+      // })
+    })
+
+    const data = await response.json()
+
+    if (! response.ok ) {
+      if (data.error)
+        throw Error(data.error.message) // strapi return error in data
+      else
+        throw Error(response.statusText)
+    }
+
+    return data
+  }
+  catch (err) {
+    throw err
+  }
+}
