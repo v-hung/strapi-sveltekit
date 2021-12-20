@@ -10,6 +10,10 @@ module.exports = {
       else
         data.slug = slugify(data.slug, {lower: true});
     }
+
+    if (!data.cost) {
+      data.cost = data.price
+    }
   },
 
   async beforeUpdate(event) {
@@ -20,6 +24,10 @@ module.exports = {
         data.slug = slugify(data.title, {lower: true});
       else
         data.slug = slugify(data.slug, {lower: true});
+    }
+
+    if (!data.cost) {
+      data.cost = data.price
     }
   },
 };

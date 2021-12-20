@@ -6,6 +6,7 @@ module.exports = ({ env }) => ({
     './fontend', // Folder
     'C:/Users/Memo/Downloads/home/home/nodejs/strapi-sveltekit/fontend',
     '/home/viethung/Desktop/Memo/nodejs/strapi-sveltekit/fontend',
-    '/home/viethung/Desktop/Memo/home/nodejs/strapi-sveltekit/fontend'
+    '/home/viethung/Desktop/Memo/home/nodejs/strapi-sveltekit/fontend',
+    'E:/memo/nodejs/strapi-sveltekit/fontend'
   ],
 });

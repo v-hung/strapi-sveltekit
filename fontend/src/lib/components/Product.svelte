@@ -1,16 +1,14 @@
 <script lang="ts">
   import { HOST_API } from "$lib/config";
+  import Image from "$lib/components/Image.svelte";
+
 
   let product
+  let img = {}
 </script>
 <div class="relative aspect-[3/4]">
-  <a href="{'#'}" class="product block w-full h-full bg-white rounded-sm">
-    <div
-      class="absolute w-full h-full top-0 left-0 bg-no-repeat bg-cover gradient-loading"
-      style=""
-    >
-      <img src="{HOST_API}{product?.attributes?.images?.data[0]?.attributes?.url}" onerror="this.classList.add('image-error')" class="w-full h-full object-cover" loading="lazy">
-    </div>
+  <a href="{'#'}" class="product relative block w-full h-full bg-white rounded-sm overflow-hidden select-none">
+    <Image img="{img}"/>
 
     <!-- badge -->
     <div class="badge badge-new space-x-2">
@@ -23,6 +21,28 @@
     </div>
 
     <!-- action -->
+    <div class="action absolute right-4 top-14 bottom-14 flex flex-col justify-center space-y-2">
+      <a href="/" style="--delay: 0s" class="w-9 h-9">
+        <span class="">
+          <i class='bx bx-cart' ></i>
+        </span>
+      </a>
+      <a href="/" style="--delay: 0.05s" class="grid w-9 h-9">
+        <span class="">
+          <i class='bx bx-heart'></i>
+        </span>
+      </a>
+      <a href="/" style="--delay: 0.1s" class="grid w-9 h-9">
+        <span class="">
+          <i class='bx bx-collapse-alt' ></i>
+        </span>
+      </a>
+      <a href="/" style="--delay: 0.15s" class="grid w-9 h-9">
+        <span class="">
+          <i class='bx bx-search-alt-2' ></i>
+        </span>
+      </a>
+    </div>
 
     <!-- price -->
     <div class="absolute right-4 bottom-4 shadow rounded-sm px-3 py-1">
@@ -40,6 +60,18 @@
 
   .product:hover {
     box-shadow: 7px 7px 15px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .product .action a {
+    @apply inline-flex transition-all ease-in-out duration-300 translate-x-16 delay-[var(--delay)];
+  }
+
+  .product:hover .action a {
+    @apply translate-x-0;
+  }
+
+  .product .action a span{
+    @apply grid transition-all ease-in-out duration-100 w-full h-full rounded-full bg-gray-100 place-content-center hover:bg-primary-500 hover:text-white;
   }
 
   .badge {

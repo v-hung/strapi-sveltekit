@@ -26,7 +26,7 @@
 			let result = await getMenuWithSlug({ slug: 'header' });
 			menu = result.data[0]?.attributes?.items || [];
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
@@ -38,7 +38,7 @@
 
 			breadcrumbImage = (await result.data[0]) || null;
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
