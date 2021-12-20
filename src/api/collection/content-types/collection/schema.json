@@ -38,15 +38,15 @@
       "relation": "oneToOne",
       "target": "api::collection.collection"
     },
-    "product": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::product.product",
-      "inversedBy": "collections"
-    },
     "type": {
       "type": "string",
       "required": false
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "collections"
     }
   }
 }

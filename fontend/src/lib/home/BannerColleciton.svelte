@@ -7,7 +7,7 @@
 
   const getCollection = async () => {
     try {
-      let result = await getCollectionWithType({type:'home', limit: 3})
+      let result = await getCollectionWithType({type:'temporary', limit: 3})
 
       collections = await result.data
 
@@ -22,9 +22,9 @@
   })
 </script>
 
-<section class="banner-static relative z-10">
+<section class="banner-static relative z-10 bg-gray-50">
   <div class="w-full max-w-7xl mx-auto px-4 -mt-36">
-    <div class="flex p-6 space-x-6 bg-white shadow">
+    <div class="flex p-6 space-x-6 bg-white shadow-sm">
       {#each collections as colletion, i (colletion.id)}
         <a href="{(colletion.attributes.slug) ? `collections/${colletion.attributes.slug}` : '#'}" class="{(i==1) ? 'w-1/2 aspect-[1.6379310344827587/1] bg-primary-100' : 'w-1/4 aspect-[0.7758620689655172/1]'} relative overflow-hidden flex items-center justify-center group">
           <div class="absolute w-full h-full top-0 left-0">

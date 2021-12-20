@@ -1,28 +1,33 @@
-<!-- <script context="module">
+<script context="module">
 	export function load({ error, status }) {
 		return {
 			props: {
-				title: `${error.message}`
+				error: error,
+        // status: status
 			}
 		};
 	}
-</script> -->
+</script>
 
 <script lang="ts">
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { breadcrumb } from "../store";
 
-  $breadcrumb = {
-    title: 'Whoops, our bad...',
-    description: `<p class="">
-        The page you requested does not exist.
-        <a href="/" class="font-semibold hover:text-primary-500">Click here</a> to continue shopping.
-      </p>`,
-    data: []
+  export let error
+
+  $: if (error) {
+    $breadcrumb = {
+      title: 'Whoops, our bad...',
+      description: `<p class="">
+          The page you requested does not exist.
+          <a href="/" class="font-semibold hover:text-primary-500">Click here</a> to continue shopping.
+        </p>`,
+      data: []
+    }
   }
 
   onDestroy(() => {
-    return $breadcrumb = {
+    $breadcrumb = {
       title: '',
       description: ``,
       data: []

@@ -5,6 +5,7 @@
 <script lang="ts">
   import Banner from "$lib/home/Banner.svelte";
   import BannerColleciton from "$lib/home/BannerColleciton.svelte";
+  import ProductSilder from "$lib/components/ProductSilder.svelte";
 </script>
 
 <svelte:head>
@@ -13,3 +14,4 @@
 
 <Banner />
 <BannerColleciton />
+<ProductSilder />
