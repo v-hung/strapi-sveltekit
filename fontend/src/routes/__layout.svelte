@@ -28,7 +28,7 @@
 		@apply flex flex-col min-h-screen relative;
 	}
 
-  :global(img) {
+  :global(img.img-error) {
     border: 1px solid transparent;
   }
 

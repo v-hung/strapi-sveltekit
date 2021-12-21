@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getCollectionWithType } from "$lib/api/collection";
+  import { getCollectionByType } from "$lib/api/collection";
   import { onMount } from "svelte";
   import { HOST_API } from "$lib/config";
 
@@ -7,7 +7,7 @@
 
   const getCollection = async () => {
     try {
-      let result = await getCollectionWithType({type:'temporary', limit: 3})
+      let result = await getCollectionByType({type:'temporary', limit: 3})
 
       collections = await result.data
 

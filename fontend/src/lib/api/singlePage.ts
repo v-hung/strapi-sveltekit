@@ -1,8 +1,8 @@
 import { HOST_API } from "../config";
 
-export const getMenuBySlug = async ({slug}) => {
+export const getSinglePageBySlug = async ({slug}) => {
   try {
-    const response = await fetch(HOST_API + `/api/menus?filters[slug][$eq]=${slug}&populate[items][populate]=childrens.childrens`, {
+    const response = await fetch(HOST_API + `/api/${slug}?populate[items][populate]=*`, {
       method: 'GET',
       mode: 'cors',
       headers: {

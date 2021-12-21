@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { user, model } from '../../store';
 	import { clickOutside } from '$lib/clickOutside';
-	import { getMenuWithSlug } from '$lib/api/menu';
+	import { getMenuBySlug } from '$lib/api/menu';
 	import { onMount } from 'svelte';
   import { HOST_API } from "$lib/config";
   import { getPhotoByGallery } from "$lib/api/photo";
@@ -23,7 +23,7 @@
 
 	const getHeaderMenu = async () => {
 		try {
-			let result = await getMenuWithSlug({ slug: 'header' });
+			let result = await getMenuBySlug({ slug: 'header' });
 			menu = result.data[0]?.attributes?.items || [];
 		} catch (error) {
 			// console.log(error);

@@ -1,10 +1,6 @@
 <script lang="ts">
   import { HOST_API } from "$lib/config";
   export let img;
-
-  const onImageError = (e) => {
-    e.target.classList.add('img-error')
-  }
 </script>
 
 {#if img}
@@ -15,7 +11,7 @@
     <img
       src="{HOST_API}{img?.src}"
       alt="{img?.caption}"
-      on:error="{onImageError}"
+      onerror="this.classList.add('img-error')"
       class="absolute w-full h-full top-0 left-0"
       loading="lazy"
     >

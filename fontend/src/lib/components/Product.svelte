@@ -2,7 +2,6 @@
   import { HOST_API } from "$lib/config";
   import Image from "$lib/components/Image.svelte";
 
-
   let product
   let img = {}
 </script>
@@ -50,6 +49,18 @@
       <span class="text-stone-600">$60.00</span>
     </div>
   </a>
+
+  <h2 class="font-semibold pt-5 pb-1">
+    <a href="{product?.url}">Hollister Backyard</a>
+  </h2>
+  <p class="inline relative">
+    <span class="inline-flex text-stone-400 text-sm">
+      <i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i>
+    </span>
+    <span style="width: 69%;" class="absolute whitespace-nowrap w-full h-full top-0 left-0 overflow-hidden text-primary-600 text-sm">
+      <i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i>
+    </span>
+  </p>
 </div>
 
 <style lang="postcss">
@@ -63,7 +74,7 @@
   }
 
   .product .action a {
-    @apply inline-flex transition-all ease-in-out duration-300 translate-x-16 delay-[var(--delay)];
+    @apply inline-flex transition-all ease-in-out duration-500 translate-x-16 delay-[var(--delay)];
   }
 
   .product:hover .action a {

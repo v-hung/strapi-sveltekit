@@ -1,6 +1,6 @@
 import { HOST_API } from "../config";
 
-export const getCollectionWithType = async ({type, limit = 25}) => {
+export const getCollectionByType = async ({type, limit = 25}) => {
   try {
     const response = await fetch(HOST_API + `/api/collections?filters[type][$eq]=${type}&populate=image&pagination[limit]=${limit}`, {
       method: 'GET',
@@ -60,7 +60,7 @@ export const getCollectionExcludeType = async ({type = 'temporary', limit = 25})
   }
 }
 
-export const getCollectionWithSlug = async ({slug, limit = 25}) => {
+export const getCollectionBySlug = async ({slug, limit = 25}) => {
   try {
     const response = await fetch(HOST_API + `/api/collections?filters[slug][$eq]=${slug}&populate=image&pagination[limit]=${limit}`, {
       method: 'GET',

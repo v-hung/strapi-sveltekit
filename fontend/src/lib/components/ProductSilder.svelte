@@ -1,9 +1,31 @@
 <script lang="ts">
   import Product from "$lib/components/Product.svelte";
-  import { Swiper, SwiperSlide } from 'swiper/svelte';
-  import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+  import { onMount } from "svelte";
+  import Swiper, { Navigation, Autoplay } from 'swiper';
+  Swiper.use([Navigation,Autoplay]);
 
-  let array = 2;
+  let array = [1,1,1,1,1,1,1];
+
+  var swiperListProduct = null
+
+  onMount(async() => {
+    swiperListProduct = new Swiper('#listProduct', {
+      loop: true,
+      slidesPerView: 4,
+      autoplay: {
+        delay: 5000,
+        // disableOnInteraction: false,
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  swiperListProduct.loopDestroy();
+  // swiperListProduct.loopCreate();
+  })
 </script>
 
 <section class="product-slider py-8 bg-gray-50">
@@ -17,23 +39,40 @@
         <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2.5 border-y-2 skew-x-[70deg]"></span>
       </h2>
     </div>
-    <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
-      spaceBetween={50}
-      slidesPerView={3}
-      navigation
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
-      on:slideChange={() => console.log('slide change')}
-      on:swiper={(e) => console.log(e.detail[0])}
-    >
-      <!-- <div class="w-full h-full"> -->
-        {#each Array(12) as _,i}
-          <SwiperSlide>
-            <Product />
-          </SwiperSlide>
-        {/each}
-      <!-- </div> -->
-    </Swiper>
+
+    <!-- slider -->
+    <div class="slider relative group">
+      <div id="listProduct" class="swiper w-full h-full overflow-hidden py-4">
+        <div class="swiper-wrapper">
+          {#each array as i}
+            <div class="swiper-slide relative px-4">
+              <Product/>
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <div class="swiper-button-prev left-4 group-hover:-translate-x-1/2">
+        <span class="!bg-white shadow border-none hover:border-primary-500 hover:text-primary-500">
+          <i class='bx bx-left-arrow-alt'></i>
+        </span>
+      </div>
+      <div class="swiper-button-next right-4 group-hover:translate-x-1/2">
+        <span class="!bg-white shadow border-none hover:border-primary-500 hover:text-primary-500">
+          <i class='bx bx-right-arrow-alt'></i>
+        </span>
+      </div>
+    </div>
   </div>
 </section>
+
+<style lang="postcss">
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply invisible opacity-0 pointer-events-none group-hover:visible group-hover:opacity-100 group-hover:pointer-events-auto transition-all ease-in-out duration-300;
+  }
+
+  :global(.swiper-button-prev,.swiper-button-next) {
+    @apply !w-12 !h-12;
+  }
+</style>

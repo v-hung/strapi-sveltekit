@@ -1,8 +1,8 @@
 <script context="module">
-	import { getCollectionWithSlug } from "$lib/api/collection";
+	import { getCollectionBySlug } from "$lib/api/collection";
 	export async function load({ page, fetch, session, stuff }) {
     try {
-		  const result = await getCollectionWithSlug({slug: page.params.slug});
+		  const result = await getCollectionBySlug({slug: page.params.slug});
 
       if (result.data.length > 0) {
         return {
