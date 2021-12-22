@@ -9,8 +9,8 @@
     style=""
   >
     <img
-      src="{HOST_API}{img?.src}"
-      alt="{img?.caption}"
+      src="{HOST_API}{img?.attributes?.url}"
+      alt="{img?.attributes?.caption}"
       onerror="this.classList.add('img-error')"
       class="absolute w-full h-full top-0 left-0"
       loading="lazy"

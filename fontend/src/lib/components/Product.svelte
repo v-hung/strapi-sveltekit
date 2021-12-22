@@ -1,23 +1,48 @@
 <script lang="ts">
   import { HOST_API } from "$lib/config";
   import Image from "$lib/components/Image.svelte";
+  import { onMount } from "svelte";
 
-  let product
-  let img = {}
+  export let product
+  let img = product?.attributes?.images
+  let percentSale = 0
+  let productNew = false
+
+  const start = () => {
+    if(product?.attributes?.price != product?.attributes?.cost) {
+      let percent = ( product?.attributes?.price - product?.attributes?.cost ) / product?.attributes?.price * 100
+      percentSale = Math.round((percent + Number.EPSILON) * 100) / 100
+    }
+
+    let now = new Date()
+    let productCreateAt = new Date(product?.attributes?.createdAt)
+    if ( (now.getTime() - productCreateAt.getTime() ) <= 2592000000) {
+      productNew = true
+    }
+  }
+
+  onMount(async() => {
+    start()
+  })
 </script>
 <div class="relative aspect-[3/4]">
   <a href="{'#'}" class="product relative block w-full h-full bg-white rounded-sm overflow-hidden select-none">
-    <Image img="{img}"/>
+    {#if product?.attributes?.images?.data.length > 0}
+      <Image img="{product?.attributes?.images?.data[0]}"/>
+    {/if}
 
     <!-- badge -->
-    <div class="badge badge-new space-x-2">
-      <span class="inline-flex text-[4px]"><i class='bx bxs-circle'></i></span>
-      <span class="text-xs font-semibold">-9%</span>
-    </div>
-    <div class="badge badge-sale space-x-2">
-      <span class="inline-flex text-[4px]"><i class='bx bxs-circle'></i></span>
-      <span class="text-xs font-semibold">-9%</span>
-    </div>
+    {#if percentSale}
+      <div class="badge badge-sale space-x-2">
+        <span class="inline-flex text-[4px]"><i class='bx bxs-circle'></i></span>
+        <span class="text-xs font-semibold">{percentSale*-1}%</span>
+      </div>
+    {:else if productNew}
+      <div class="badge badge-new space-x-2">
+        <span class="inline-flex text-[4px]"><i class='bx bxs-circle'></i></span>
+        <span class="text-xs font-semibold">New</span>
+      </div>
+    {/if}
 
     <!-- action -->
     <div class="action absolute right-4 top-14 bottom-14 flex flex-col justify-center space-y-2">
@@ -45,13 +70,15 @@
 
     <!-- price -->
     <div class="absolute right-4 bottom-4 shadow rounded-sm px-3 py-1">
-      <span class="font-semibold">$49.00</span>
-      <span class="text-stone-600">$60.00</span>
+      {#if product?.attributes?.cost}
+        <span class="font-semibold">${product?.attributes?.cost}</span>
+      {/if}
+      <span class="text-stone-600 line-through text-sm">${product?.attributes?.price}</span>
     </div>
   </a>
 
   <h2 class="font-semibold pt-5 pb-1">
-    <a href="{product?.url}">Hollister Backyard</a>
+    <a href="{product?.attributes?.url}">{product?.attributes?.title}</a>
   </h2>
   <p class="inline relative">
     <span class="inline-flex text-stone-400 text-sm">

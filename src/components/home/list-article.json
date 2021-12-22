@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_home_list_articles",
+  "info": {
+    "displayName": "listArticle",
+    "icon": "glass-martini-alt"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "showBlogs": {
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.blog"
+    }
+  }
+}

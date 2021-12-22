@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_home_list_brands",
+  "info": {
+    "displayName": "listBrand",
+    "icon": "bus"
+  },
+  "options": {},
+  "attributes": {
+    "status": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

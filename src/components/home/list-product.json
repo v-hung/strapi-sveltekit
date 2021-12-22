@@ -17,6 +17,10 @@
     },
     "description": {
       "type": "text"
+    },
+    "showCollections": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

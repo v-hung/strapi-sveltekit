@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_home_list_collections",
+  "info": {
+    "displayName": "listCollection",
+    "icon": "clipboard-list"
+  },
+  "options": {},
+  "attributes": {
+    "collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection.collection"
+    }
+  }
+}

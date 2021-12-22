@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_home_newsletters",
+  "info": {
+    "displayName": "newsletter",
+    "icon": "newspaper"
+  },
+  "options": {},
+  "attributes": {
+    "status": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

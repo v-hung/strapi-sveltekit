@@ -4,7 +4,8 @@
   "info": {
     "singularName": "home-page",
     "pluralName": "home-pages",
-    "displayName": "HomePage"
+    "displayName": "HomePage",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,7 +15,12 @@
     "items": {
       "type": "dynamiczone",
       "components": [
-        "home.list-product"
+        "home.list-product",
+        "home.banner-static",
+        "home.list-article",
+        "home.list-brand",
+        "home.list-collection",
+        "home.newsletter"
       ]
     }
   }

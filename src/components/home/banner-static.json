@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_home_banner_statics",
+  "info": {
+    "displayName": "bannerStatic",
+    "icon": "chair"
+  },
+  "options": {},
+  "attributes": {
+    "status": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
