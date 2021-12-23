@@ -2,13 +2,24 @@
   "collectionName": "components_home_banner_statics",
   "info": {
     "displayName": "bannerStatic",
-    "icon": "chair"
+    "icon": "chair",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "status": {
       "type": "boolean",
       "default": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "url": {
+      "type": "string"
     }
   }
 }

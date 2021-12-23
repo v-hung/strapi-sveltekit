@@ -22,7 +22,7 @@
   })
 </script>
 
-<section class="banner-collection relative z-10 bg-gray-50">
+<section class="banner-collection relative z-10">
   <div class="w-full max-w-7xl mx-auto px-4 -mt-36">
     <div class="flex p-6 space-x-6 bg-white shadow-sm">
       {#each collections as colletion, i (colletion.id)}

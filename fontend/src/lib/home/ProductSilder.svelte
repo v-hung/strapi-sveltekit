@@ -1,27 +1,36 @@
 <script lang="ts">
   import Product from "$lib/components/Product.svelte";
   import { onMount } from "svelte";
-  import { getProductByCollection } from "$lib/api/product";
+  import { getProductByCollection, getProductByLatest } from "$lib/api/product";
   import Loading2 from "$lib/loading/Loading2.svelte";
   import Swiper, { Navigation, Autoplay } from 'swiper';
   Swiper.use([Navigation,Autoplay]);
 
   export let title = 'Feature Products'
-  export let description = ''
+  export let type = null
   export let showCollections = true
   export let collections = []
   let loading = false
   let products = []
-  let collectionSlected = collections[0]?.attributes?.slug || null
+  let collectionSelected = collections[0]?.attributes?.slug || null
   let idComponent = 'listProduct' + new Date().getTime()
 
   const getProducts = async (slug) => {
     try {
-      if (loading || !slug) return
+      if (type) {
+        if (type == 'latest') {
+          loading = true
+          let result = await getProductByLatest({})
+          products = result?.data || []
+        }
+      } else {
 
-      loading = true
-      let result = await getProductByCollection({slug:slug})
-      products = result?.data || []
+        if (loading || !slug) return
+
+        loading = true
+        let result = await getProductByCollection({slug:slug})
+        products = result?.data || []
+      }
     }
     catch (error){
       console.log(error);
@@ -32,7 +41,7 @@
   }
 
   const selectCollection = async (slug) => {
-    collectionSlected = slug
+    collectionSelected = slug
     await getProducts(slug)
     swiperListProduct.loopDestroy()
     swiperListProduct.loopCreate()
@@ -41,7 +50,7 @@
   var swiperListProduct = null
 
   onMount(async() => {
-    await getProducts(collections[0].attributes.slug)
+    await getProducts((collections.length > 0) ? collections[0]?.attributes?.slug : '')
 
     swiperListProduct = new Swiper('#'+idComponent, {
       loop: true,
@@ -63,7 +72,7 @@
   })
 </script>
 
-<section class="product-slider py-8 bg-gray-50">
+<section class="product-slider py-8">
   <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
     <div class="text-center py-8">
       <span class="text-4xl">
@@ -81,30 +90,32 @@
           <a
             on:click|preventDefault="{() => selectCollection(collection?.attributes?.slug)}"
             href="collections/{collection?.attributes?.slug}"
-            class="{collectionSlected == collection?.attributes?.slug ? 'text-primary-500' : ''} px-4 uppercase text-stone-400 hover:text-primary-500 text-sm font-semibold"
+            class="{collectionSelected == collection?.attributes?.slug ? 'text-primary-500' : ''} px-4 uppercase text-stone-400 hover:text-primary-500 text-sm font-semibold"
           >{collection?.attributes?.title}</a>
         {/each}
       </div>
     {/if}
 
     <!-- slider -->
-    <div class="slider relative group min-h-[200px]">
+    <div class="slider relative group">
       <div id="{idComponent}" class="swiper w-full h-full overflow-hidden py-4">
         <div class="swiper-wrapper">
           {#each products as product (product.id)}
             <div class="swiper-slide relative px-4">
               <Product product={product}/>
             </div>
+          {:else}
+            <p class="text-center py-4 w-full">Không có sản phẩm nào</p>
           {/each}
         </div>
       </div>
 
-      <div class="{products.length > 0 ? '' : 'hidden'}swiper-button-prev left-4 group-hover:-translate-x-1/2">
+      <div class="swiper-button-prev left-4 group-hover:-translate-x-1/2" style="{products.length > 0 ? '' : 'display: none'}">
         <span class="!bg-white shadow border-none hover:border-primary-500 hover:text-primary-500">
           <i class='bx bx-left-arrow-alt'></i>
         </span>
       </div>
-      <div class="{products.length > 0 ? '' : 'hidden'}swiper-button-next right-4 group-hover:translate-x-1/2">
+      <div class="swiper-button-next right-4 group-hover:translate-x-1/2" style="{products.length > 0 ? '' : 'display: none'}">
         <span class="!bg-white shadow border-none hover:border-primary-500 hover:text-primary-500">
           <i class='bx bx-right-arrow-alt'></i>
         </span>

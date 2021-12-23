@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
-	import Header from '$lib/header/Header.svelte';
+	import Header from '$lib/home/Header.svelte';
+  import Footer from '$lib/home/Footer.svelte';
 	import { cookies } from '$lib/config';
 	import { user } from '../store';
 	import { loggerAPI } from '$lib/api/auth';
@@ -11,13 +12,10 @@
 </script>
 
 <Header />
-<main class="flex-grow flex flex-col">
+<main class="flex-grow flex flex-col bg-[#f2f2f2]">
 	<slot />
 </main>
-
-<footer class="flex-none border-t text-center">
-	<p class="px-4 py-2">Việt Hùng Developer</p>
-</footer>
+<Footer />
 
 <style lang="postcss">
 	:global(body) {

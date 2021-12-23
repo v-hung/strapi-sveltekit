@@ -1,8 +1,8 @@
 import { HOST_API } from "../config";
 
-export const getSinglePageBySlug = async ({slug}) => {
+export const getArticleByBlog = async ({slug, limit = 10}) => {
   try {
-    const response = await fetch(HOST_API + `/api/${slug}?populate[items][populate]=blogs,image,collections.image`, {
+    const response = await fetch(HOST_API + `/api/articles?filters[blogs][slug][$eq]=${slug}&populate=images&pagination[limit]=${limit}`, {
       method: 'GET',
       mode: 'cors',
       headers: {

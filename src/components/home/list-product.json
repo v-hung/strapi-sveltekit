@@ -21,6 +21,14 @@
     "showCollections": {
       "type": "boolean",
       "default": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "latest",
+        "bestSell",
+        "promotion"
+      ]
     }
   }
 }
