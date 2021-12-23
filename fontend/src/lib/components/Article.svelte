@@ -1,63 +1,29 @@
 <script lang="ts">
-  import { HOST_API } from "$lib/config";
   import Image from "./Image.svelte";
+  import { formatTime } from "$lib/utils/time";
 
   export let article
-  console.log(article);
-
+  export let blogSlug
 </script>
 
-<div class="relative">
-  <div class="article p-4">
+<div class="relative h-full">
+  <div class="article p-5 bg-white h-full flex flex-wrap">
+    <div class="w-full relative pt-[75%] overflow-hidden">
+      <a href="{'#'}" class="absolute block w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-all duration-300">
+        <Image img="{article?.attributes?.image?.data}"/>
+      </a>
+    </div>
 
+    <p class="w-full py-4 text-sm font-semibold text-stone-400">{formatTime(article?.attributes?.createdAt)}</p>
+    <h2 class="w-full uppercase font-semibold line-clamp-2 hover:text-primary-500">
+      <a href="/blogs/{blogSlug}/{article?.attributes?.slug}">{ article?.attributes?.title }</a>
+    </h2>
+    {#if article?.attributes?.description}
+      <p class="w-full py-4 line-clamp-3 text-stone-500">{ article?.attributes?.description }</p>
+    {/if}
+
+    <a href="/blogs/{blogSlug}/{article?.attributes?.slug}" class="text-sm font-semibold border-b border-stone-300 hover:text-primary-500 hover:border-primary-500 self-end">Read more</a>
   </div>
-  <a href="{'#'}" class="relative block w-full aspect-[4/3] overflow-hidden select-none">
-    <Image img="{article?.attributes?.image?.data}"/>
-  </a>
-
-    <!-- action -->
-    <div class="action absolute right-4 top-14 bottom-14 flex flex-col justify-center space-y-2">
-      <a href="/" style="--delay: 0s" class="w-9 h-9">
-        <span class="">
-          <i class='bx bx-cart' ></i>
-        </span>
-      </a>
-      <a href="/" style="--delay: 0.05s" class="grid w-9 h-9">
-        <span class="">
-          <i class='bx bx-heart'></i>
-        </span>
-      </a>
-      <a href="/" style="--delay: 0.1s" class="grid w-9 h-9">
-        <span class="">
-          <i class='bx bx-collapse-alt' ></i>
-        </span>
-      </a>
-      <a href="/" style="--delay: 0.15s" class="grid w-9 h-9">
-        <span class="">
-          <i class='bx bx-search-alt-2' ></i>
-        </span>
-      </a>
-    </div>
-
-    <!-- price -->
-    <div class="absolute right-4 bottom-4 shadow rounded-sm px-3 py-1">
-      {#if article?.attributes?.cost}
-        <span class="font-semibold">${article?.attributes?.cost}</span>
-      {/if}
-      <span class="text-stone-600 line-through text-sm">${article?.attributes?.price}</span>
-    </div>
-
-  <h2 class="font-semibold pt-5 pb-1">
-    <a href="{article?.attributes?.url}">{article?.attributes?.title}</a>
-  </h2>
-  <p class="inline relative">
-    <span class="inline-flex text-stone-400 text-sm">
-      <i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i>
-    </span>
-    <span style="width: 69%;" class="absolute whitespace-nowrap w-full h-full top-0 left-0 overflow-hidden text-primary-600 text-sm">
-      <i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i>
-    </span>
-  </p>
 </div>
 
 <style lang="postcss">

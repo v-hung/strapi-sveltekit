@@ -60,6 +60,12 @@
     "sold": {
       "type": "integer",
       "default": 0
+    },
+    "brand": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::brand.brand",
+      "inversedBy": "products"
     }
   }
 }

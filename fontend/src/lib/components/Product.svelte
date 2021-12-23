@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { HOST_API } from "$lib/config";
   import Image from "$lib/components/Image.svelte";
   import { onMount } from "svelte";
 

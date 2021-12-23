@@ -13,7 +13,7 @@
   export let showBlogs = false
   let loading = false
   let blog = []
-  let blogsSelected = blogs[0]?.attributes?.slug || null
+  let blogSelected = blogs[0]?.attributes?.slug || null
   let idComponent = 'listArticle' + new Date().getTime()
 
   const getArticles = async (slug) => {
@@ -33,7 +33,7 @@
   }
 
   const selectBlog = async (slug) => {
-    blogsSelected = slug
+    blogSelected = slug
     await getArticles(slug)
     swiperListProduct.loopDestroy()
     swiperListProduct.loopCreate()
@@ -47,7 +47,7 @@
     swiperListProduct = new Swiper('#'+idComponent, {
       loop: true,
       observer: true,
-      slidesPerView: 4,
+      slidesPerView: 3,
       autoplay: {
         delay: 5000,
         // disableOnInteraction: false,
@@ -86,7 +86,7 @@
             <a
               on:click|preventDefault="{() => selectBlog(collection?.attributes?.slug)}"
               href="blogs/{collection?.attributes?.slug}"
-              class="{blogsSelected == collection?.attributes?.slug ? 'text-primary-500' : ''} px-4 uppercase text-stone-400 hover:text-primary-500 text-sm font-semibold"
+              class="{blogSelected == collection?.attributes?.slug ? 'text-primary-500' : ''} px-4 uppercase text-stone-400 hover:text-primary-500 text-sm font-semibold"
             >{collection?.attributes?.title}</a>
           {/each}
         </div>
@@ -97,8 +97,8 @@
         <div id="{idComponent}" class="swiper w-full h-full overflow-hidden py-4">
           <div class="swiper-wrapper">
             {#each blog as article (article.id)}
-              <div class="swiper-slide relative px-4">
-                <Article article={article}/>
+              <div class="swiper-slide relative px-4 h-initial">
+                <Article blogSlug={blogSelected} article={article}/>
               </div>
             {:else}
               <p class="text-center py-4 w-full">Không có sản phẩm nào</p>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { user, model } from '../../store';
-	import { clickOutside } from '$lib/clickOutside';
+	import { clickOutside } from '$lib/utils/clickOutside';
 	import { getMenuBySlug } from '$lib/api/menu';
 	import { onMount } from 'svelte';
   import { HOST_API } from "$lib/config";
