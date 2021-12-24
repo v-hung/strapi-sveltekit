@@ -44,7 +44,7 @@
   {:else if section?.__component == 'home.banner-static'}
     <BannerStatic img={section?.image?.data} url={section?.url}/>
   {:else if section?.__component == 'home.newsletter'}
-    <Newsletter />
+    <Newsletter title={section?.title} description={section?.description} img={section?.image?.data}/>
   {:else if section?.__component == 'home.list-brand'}
     <BrandSlider />
   {/if}
