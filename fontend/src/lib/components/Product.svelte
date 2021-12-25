@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
 
   export let product
+  export let collection_slug = null
   let img = product?.attributes?.images
   let percentSale = 0
   let productNew = false
@@ -25,7 +26,7 @@
   })
 </script>
 <div class="relative aspect-[3/4]">
-  <a href="{'#'}" class="product relative block w-full h-full bg-white rounded-sm overflow-hidden select-none">
+  <a href="{(collection_slug) ? `/collections/${collection_slug}` : ''}/products/{product?.attributes?.slug}" class="product relative block w-full h-full bg-white rounded-sm overflow-hidden select-none">
     {#if product?.attributes?.images?.data.length > 0}
       <Image img="{product?.attributes?.images?.data[0]}"/>
     {/if}

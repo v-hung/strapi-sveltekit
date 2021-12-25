@@ -47,7 +47,7 @@
     swiperListProduct.loopCreate()
   }
 
-  var swiperListProduct = null
+  let swiperListProduct = null
 
   onMount(async() => {
     await getProducts((collections.length > 0) ? collections[0]?.attributes?.slug : '')
@@ -102,7 +102,7 @@
         <div class="swiper-wrapper">
           {#each products as product (product.id)}
             <div class="swiper-slide relative px-4">
-              <Product product={product}/>
+              <Product product={product} collection_slug={collectionSelected}/>
             </div>
           {:else}
             <p class="text-center py-4 w-full">Không có sản phẩm nào</p>

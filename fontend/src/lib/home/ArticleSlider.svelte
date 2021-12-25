@@ -35,16 +35,16 @@
   const selectBlog = async (slug) => {
     blogSelected = slug
     await getArticles(slug)
-    swiperListProduct.loopDestroy()
-    swiperListProduct.loopCreate()
+    swiperListArticle.loopDestroy()
+    swiperListArticle.loopCreate()
   }
 
-  var swiperListProduct = null
+  let swiperListArticle = null
 
   onMount(async() => {
     await getArticles((blogs.length > 0) ? blogs[0]?.attributes?.slug : '')
 
-    swiperListProduct = new Swiper('#'+idComponent, {
+    swiperListArticle = new Swiper('#'+idComponent, {
       loop: true,
       observer: true,
       slidesPerView: 3,

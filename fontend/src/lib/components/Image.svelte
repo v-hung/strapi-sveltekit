@@ -12,7 +12,7 @@
       src="{HOST_API}{img?.attributes?.url}"
       alt="{img?.attributes?.caption}"
       onerror="this.classList.add('img-error')"
-      class="absolute w-full h-full top-0 left-0"
+      class="absolute w-full h-full top-0 left-0 object-cover"
       loading="lazy"
     >
     <span class="has-error absolute w-full h-full top-0 left-0 flex flex-col items-center justify-center bg-white text-stone-600">

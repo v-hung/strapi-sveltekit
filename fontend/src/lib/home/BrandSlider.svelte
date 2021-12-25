@@ -19,7 +19,7 @@
     }
   }
 
-  var swiperBrand = null
+  let swiperBrand = null
 
   onMount(async() => {
     await getListBrand()
