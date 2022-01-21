@@ -41,7 +41,7 @@ const config = {
     colors: {
 			transparent: 'transparent',
 			current: 'currentColor',
-			black: colors.black,
+			// black: colors.black,
       white: colors.white,
 			slate: colors.slate,
 			gray: colors.gray,
@@ -77,7 +77,7 @@ const config = {
       //   '800' : 'var(--color-primary-800)',
       //   '900' : 'var(--color-primary-900)',
       // },
-      primary: colors.amber
+      primary: colors.blue
 		},
     border: {
       // primary: {
@@ -92,7 +92,7 @@ const config = {
       //   '800' : 'var(--color-primary-800)',
       //   '900' : 'var(--color-primary-900)',
       // },
-      primary: colors.amber
+      primary: colors.blue
     },
     background: {
       // primary: {
@@ -107,12 +107,12 @@ const config = {
       //   '800' : 'var(--color-primary-800)',
       //   '900' : 'var(--color-primary-900)',
       // },
-      primary: colors.amber
+      primary: colors.blue
     }
 	},
 
 	plugins: [
-    require('@tailwindcss/line-clamp')
+    require('windicss/plugin/line-clamp'),
   ]
 };
 
